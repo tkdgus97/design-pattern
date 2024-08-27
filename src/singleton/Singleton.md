@@ -62,16 +62,20 @@ synchronized는 기본적으로 lock을 사용하여 동기화를 시킨다(stat
 2. 이른 초기화
 ```java
 public class EagerSettings {
-    private static EagerSettings instance = new EagerSettings();
+    private static final EagerSettings INSTANCE = new EagerSettings();
     private EagerSettings() {
     }
 
     public static synchronized EagerSettings getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }
-
 ```
+만약 나중에 만들 필요가 없다면 미리 만들어 놓을 수도 있다. 
+static 인스턴스이기 때문에 클래스 로딩 시에 이미 생성되어 메모리에 올라가게 된다.
+
+3. static inner class 
+만약 나중에 생성을 하고 싶다면 static inner class를 활용하는 방법이 있다.
 
 ### 장점
 
