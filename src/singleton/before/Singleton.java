@@ -1,16 +1,23 @@
 package singleton.before;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Singleton {
     static int numberOfThreads = 1000;
-    public static void main(String[] args) {
-        System.out.println("dddd");
-        syncTest();
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+//        syncTest();
+//
+//        eagerTest();
 
-        eagerTest();
+        Constructor<InnerSettings> innerSettings = InnerSettings.class.getDeclaredConstructor();
+        innerSettings.setAccessible(true);
+        InnerSettings settings = innerSettings.newInstance();
+
+        System.out.println(InnerSettings.getInstance() == settings);
     }
 
     static void syncTest() {

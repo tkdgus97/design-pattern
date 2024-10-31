@@ -74,8 +74,36 @@ public class EagerSettings {
 만약 나중에 만들 필요가 없다면 미리 만들어 놓을 수도 있다. 
 static 인스턴스이기 때문에 클래스 로딩 시에 이미 생성되어 메모리에 올라가게 된다.
 
-3. static inner class 
-만약 나중에 생성을 하고 싶다면 static inner class를 활용하는 방법이 있다.
+3. static inner class  
+만약 나중에 생성을 하고 싶다면 static inner class를 활용하는 방법이 있다.  
+> 해당 방법이 왜 스레드 세이프 한지와 싱글톤이 가능한지 이해가 잘 안가서 [class load](클래스로드.md)와 관련된 내용을 찾아보게되었다
+
+```java
+public class InnerSettings {
+
+    private InnerSettings() {
+    }
+
+    private static class InnerSettingsHolder {
+        private static final InnerSettings INSTANCE = new InnerSettings();
+    }
+
+    public static InnerSettings getInstance() {
+        return InnerSettingsHolder.INSTANCE;
+    }
+}
+```
+위 세개의 방식은 싱글톤을 구현하는 방식 중 일부이다. 하지만 위의 코드들은 몇가지 방법을 통해 싱글톤을 깨트릴 수 있다.  
+그 중 자바의 reflection API를 활용하여 아래처럼 서로 다른 싱글톤 인스턴스를 만들 수 있다.
+```java
+public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    Constructor<InnerSettings> innerSettings = InnerSettings.class.getDeclaredConstructor();
+    innerSettings.setAccessible(true);
+    InnerSettings settings = innerSettings.newInstance();
+
+    System.out.println(InnerSettings.getInstance() == settings);
+}
+```
 
 ### 장점
 
