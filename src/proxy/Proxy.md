@@ -93,5 +93,5 @@ public class Client {
   - 인터페이스 없이 적용하려면 추가로 구현해야 할 것이 많아질 수 있다. 
 
 ### Java & Spring
-자바에서는 런타임에 프록시 인스턴스를 만들어주는 기능을 제공하고 있다. 이것을 **Dynamic Proxy**라고 부른다.  
-Reflection 에서 Proxy 클래스를 통해 만들 수 있다.
+자바에서는 런타임에 인터페이스 기반으로 프록시를 생성하며 동적 생성이 가능한 **Dynamic Proxy**라는 기능을 제공한다.
+Reflection에서 Proxy.newProxyInstance 메서드와 InvocationHandler를 사용해 프록시의 동작을 정의할 수 있다.
