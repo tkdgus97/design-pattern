@@ -8,7 +8,7 @@
 
 - [팩토리 메소드](./factorymethod/FactoryMethod.md)
 - [추상 팩토리 패턴](./abstractFactory/AbstractFactory.md)
-
+- [싱글톤 패턴](./singleton/Singleton.md)
 ### 구조 패턴 
-
+- [프록시 패턴](./proxy/Proxy.md)
 ### 생성 패턴
