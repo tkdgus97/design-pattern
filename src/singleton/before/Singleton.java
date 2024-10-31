@@ -18,6 +18,10 @@ public class Singleton {
         InnerSettings settings = innerSettings.newInstance();
 
         System.out.println(InnerSettings.getInstance() == settings);
+
+        Runtime runtime = Runtime.getRuntime();
+
+        System.out.println(runtime.maxMemory());
     }
 
     static void syncTest() {

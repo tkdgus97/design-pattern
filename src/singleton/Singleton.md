@@ -101,12 +101,37 @@ public static void main(String[] args) throws NoSuchMethodException, InvocationT
     innerSettings.setAccessible(true);
     InnerSettings settings = innerSettings.newInstance();
 
-    System.out.println(InnerSettings.getInstance() == settings);
+    System.out.println(InnerSettings.getInstance() == settings); //false
 }
 ```
 
 ### 장점
-
+- 메모리 절약
+- 글로벌 접근성
 ### 단점
+- 멀티스레드 환경에서의 동기화 문제로 인한 데이터 불일치 발생할 수 있음
+- 전역 인스턴스이므로 모듈 간 결합도가 높아진다
+- private 생성자는 상속이 불가능 하다
+  - 위 두 이유로 안티패턴으로 불리기도 한다.
+### Java에서는?
+자바에서는 대표적으로 Runtime 클래스가 싱글톤으로 구현되어있다.
 
-### Spring에서는?
+```java
+Runtime runtime = Runtime.getRuntime();
+
+
+System.out.println(runtime.maxMemory());
+
+//내부 구현
+public class Runtime {
+    ...
+    
+    public static Runtime getRuntime() {
+        return currentRuntime;
+    }
+
+    /** Don't let anyone else instantiate this class */
+    private Runtime() {
+    }
+}
+```
