@@ -94,4 +94,8 @@ public class Client {
 
 ### Java & Spring
 자바에서는 런타임에 인터페이스 기반으로 프록시를 생성하며 동적 생성이 가능한 **Dynamic Proxy**라는 기능을 제공한다.
-Reflection에서 Proxy.newProxyInstance 메서드와 InvocationHandler를 사용해 프록시의 동작을 정의할 수 있다.
+Reflection에서 Proxy.newProxyInstance 메서드와 InvocationHandler를 사용해 프록시의 동작을 정의할 수 있다.  
+Spring에서는 AOP 기능을 제공하는데 이때 프록시 패턴을 활용한다. 
+> Spring은 AOP Porxy를 생성하는 과정에서 자체 검증 로직을 통해 target의 인터페이스 유무를 판단한다.  
+> 이때 타깃이 하나 이상의 인터페이스를 구현한다면 JDK Dynamic Proxy 방식으로 Porxy Bean을 생성하고 아니라면 CGLIB 방식으로 생성한다.  
+> 
